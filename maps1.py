@@ -1,6 +1,7 @@
 import requests
 import urllib
 import os
+import json
 
 def Confirmar():
     preg = input("Desea repetir?: s/n?: ")
@@ -43,17 +44,16 @@ def Main():
                     css = file.read()
                 with open("view/model.css",'w') as file:
                     file.write(css)
-                    
                 with open("index.html",'r') as file:
                     content = file.read()
                     
-                content=content.replace('{Origen}',origin)
-                content=content.replace('{Destino}',destination)
-                content=content.replace('{Duracion}',duration)
+                content = content.replace('{Origen}',origin)
+                content = content.replace('{Destino}',destination)
+                content = content.replace('{Duracion}',duration)
                     
                 with open("view/"+ origin + destination +".html",'w') as file:
                     file.write(content)
-                    print("LA PAGINA SE CREO")
+                    
         continuar = Confirmar()
         print (continuar)
 Main()
