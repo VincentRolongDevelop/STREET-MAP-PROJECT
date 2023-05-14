@@ -2,8 +2,10 @@ import requests
 import urllib
 import os
 import json
+#LUIFER BRANCH
 
-def Confirmar():
+
+def confirmar():
     preg = input("Desea repetir?: s/n?: ")
     if preg in ('S','s'):
         return True
@@ -11,11 +13,10 @@ def Confirmar():
         return False
     else:
         print("Ingresar solo s o n, por favor")
-        return Confirmar()
+        return confirmar()
 
-def Main():
+def main():
     continuar = True
-    continuar2 = True
     while continuar is True:
         api_url = "https://www.mapquestapi.com/directions/v2/route?"
         key ="Jza27DprNplH026ncxVaDdEhjPRMIP0a"
@@ -36,24 +37,13 @@ def Main():
             print(f"Información del viaje desde: {origin.capitalize()} hasta {destination.capitalize()}")
             print(f"Duración del viaje: {duration.capitalize()}")
             print(f"Distancia del viaje en kilometros: "+ str("{:.2f}".format(distance)))
+                
+            #content = content.replace('{Origen}',origin)
+            #content = content.replace('{Destino}',destination)
+            #content = content.replace('{Duracion}',duration)
+                        
+        continuar = confirmar()
+        return continuar
 
-            if os.path.exists("index.html"):
-                if os.path.isdir("view")==False:
-                    os.mkdir("view")
-                with open("model.css",'r') as file:
-                    css = file.read()
-                with open("view/model.css",'w') as file:
-                    file.write(css)
-                with open("index.html",'r') as file:
-                    content = file.read()
-                    
-                content = content.replace('{Origen}',origin)
-                content = content.replace('{Destino}',destination)
-                content = content.replace('{Duracion}',duration)
-                    
-                with open("view/"+ origin + destination +".html",'w') as file:
-                    file.write(content)
-                    
-        continuar = Confirmar()
-        print (continuar)
-Main()
+if __name__=="__main__":
+    main()
