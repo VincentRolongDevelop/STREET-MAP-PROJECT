@@ -55,5 +55,7 @@ def Main():
                     file.write(content)
                     
         continuar = Confirmar()
-        print (continuar)
+        
+        #TESTING
+        print (url)
 Main()
