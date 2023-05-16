@@ -2,20 +2,8 @@ import requests
 import urllib
 import os
 import json
-#LUIFER BRANCH
 
-
-def confirmar():
-    preg = input("Desea repetir?: s/n?: ")
-    if preg in ('S','s'):
-        return True
-    elif preg in ('N','n'):
-        return False
-    else:
-        print("Ingresar solo s o n, por favor")
-        return confirmar()
-
-def main():
+def map():  
     continuar = True
     while continuar is True:
         api_url = "https://www.mapquestapi.com/directions/v2/route?"
@@ -37,13 +25,3 @@ def main():
             print(f"Información del viaje desde: {origin.capitalize()} hasta {destination.capitalize()}")
             print(f"Duración del viaje: {duration.capitalize()}")
             print(f"Distancia del viaje en kilometros: "+ str("{:.2f}".format(distance)))
-                
-            #content = content.replace('{Origen}',origin)
-            #content = content.replace('{Destino}',destination)
-            #content = content.replace('{Duracion}',duration)
-                        
-        continuar = confirmar()
-        return continuar
-
-if __name__=="__main__":
-    main()
