@@ -3,9 +3,10 @@ import requests
 import json
 
 class MyRequestHandler(http.server.BaseHTTPRequestHandler):
-    def do_GET(self):
+    key = "32efpKKQxCSJchjYCMwAuREIB7ywAOAd"
+    def do_GET(self, location):
         if self.path == '/api':
-            response = self.get_external_data()
+            response = self.get_external_data(self.key, location)
             if response is not None:
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json')
@@ -20,9 +21,9 @@ class MyRequestHandler(http.server.BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'Error 404: Not Found')
 
-    def get_external_data(self):
+    def get_external_data(self, key, location):
         try:
-            response = requests.get('https://www.mapquestapi.com/geocoding/v1/address?key=32efpKKQxCSJchjYCMwAuREIB7ywAOAd&location=1600+Pennsylvania+Ave+NW,Washington,DC,20500')
+            response = requests.get('https://www.mapquestapi.com/geocoding/v1/address?key='+key+'&location='+location)
             if response.status_code == 200:
                 return response.json()
             else:
